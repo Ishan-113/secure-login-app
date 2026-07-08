@@ -48,80 +48,87 @@ function App() {
 
   if (token) {
     return (
-      <div style={{ maxWidth: '400px', margin: '50px auto', fontFamily: 'sans-serif' }}>
-        <h2>Dashboard</h2>
-        {profile ? (
-          <p>Welcome, <strong>{profile.username}</strong>! 🎉</p>
-        ) : (
-          <p>Loading profile...</p>
-        )}
-        <button onClick={() => { setToken(''); setProfile(null); }} style={{ padding: '8px 16px' }}>Logout</button>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-4">
+        <div className="w-full max-w-sm bg-slate-800/60 backdrop-blur-xl border border-slate-700 rounded-2xl shadow-2xl p-8 text-center">
+          <div className="w-16 h-16 rounded-full bg-indigo-600 mx-auto mb-4 flex items-center justify-center text-2xl font-bold text-white">
+            {profile ? profile.username[0].toUpperCase() : '?'}
+          </div>
+          <h2 className="text-xl font-bold text-white mb-2">Dashboard</h2>
+          {profile ? (
+            <p className="text-slate-300 mb-6">
+              Welcome, <strong className="text-white">{profile.username}</strong>! 🎉
+            </p>
+          ) : (
+            <p className="text-slate-400 mb-6">Loading profile...</p>
+          )}
+          <button
+            onClick={() => { setToken(''); setProfile(null); }}
+            className="w-full py-2.5 rounded-lg bg-red-600/90 hover:bg-red-500 text-white font-medium transition"
+          >
+            Logout
+          </button>
+        </div>
       </div>
     );
   }
 
-  const inputStyle = {
-    display: 'block',
-    width: '100%',
-    marginBottom: '10px',
-    padding: '8px',
-    boxSizing: 'border-box',
-  };
-
   return (
-    <div style={{ maxWidth: '400px', margin: '50px auto', fontFamily: 'sans-serif' }}>
-      <h2>{isLogin ? 'Login' : 'Register'}</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          style={inputStyle}
-        />
-        <div style={{ position: 'relative', marginBottom: '10px', width: '100%' }}>
-          <input
-            type={showPassword ? 'text' : 'password'}
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{ ...inputStyle, marginBottom: '0', paddingRight: '70px' }}
-          />
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            style={{
-              position: 'absolute',
-              right: '8px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '13px',
-              color: '#aaa',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            {showPassword ? '🙈 Hide' : '👁 Show'}
-          </button>
-        </div>
-        <button type="submit" style={{ padding: '8px 16px' }}>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-4">
+      <div className="w-full max-w-sm bg-slate-800/60 backdrop-blur-xl border border-slate-700 rounded-2xl shadow-2xl p-8">
+        <h2 className="text-2xl font-bold text-white text-center mb-6">
           {isLogin ? 'Login' : 'Register'}
-        </button>
-      </form>
+        </h2>
 
-      <p style={{ marginTop: '10px' }}>
-        {isLogin ? "Don't have an account? " : 'Already have an account? '}
-        <button
-          onClick={() => { setIsLogin(!isLogin); setMessage(''); setUsername(''); setPassword(''); setShowPassword(false); }}
-          style={{ background: 'none', border: 'none', color: 'blue', cursor: 'pointer', textDecoration: 'underline' }}
-        >
-          {isLogin ? 'Register here' : 'Login here'}
-        </button>
-      </p>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="w-full px-4 py-2.5 rounded-lg bg-slate-900/60 border border-slate-600 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+          />
 
-      {message && <p>{message}</p>}
+          <div className="relative">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-2.5 rounded-lg bg-slate-900/60 border border-slate-600 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition pr-16"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-indigo-400 hover:text-indigo-300 font-medium"
+            >
+              {showPassword ? '🙈 Hide' : '👁 Show'}
+            </button>
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition shadow-lg shadow-indigo-600/20"
+          >
+            {isLogin ? 'Login' : 'Register'}
+          </button>
+        </form>
+
+        <p className="text-center text-slate-400 text-sm mt-6">
+          {isLogin ? "Don't have an account? " : 'Already have an account? '}
+          <button
+            onClick={() => { setIsLogin(!isLogin); setMessage(''); setUsername(''); setPassword(''); setShowPassword(false); }}
+            className="text-indigo-400 hover:text-indigo-300 font-medium"
+          >
+            {isLogin ? 'Register here' : 'Login here'}
+          </button>
+        </p>
+
+        {message && (
+          <p className="text-center text-sm mt-4 px-4 py-2 rounded-lg bg-slate-900/60 text-slate-300">
+            {message}
+          </p>
+        )}
+      </div>
     </div>
   );
 }

@@ -4,7 +4,7 @@ A responsive full-stack authentication app with user registration, login, a prot
 
 ## Live Demo
 
-- Frontend: PASTE_MY_VERCEL_LIVE_LINK_HERE
+- Frontend: https://secure-login-app-teal.vercel.app/
 - Backend API: https://secure-login-app-lqhw.onrender.com
 - GitHub Repository: https://github.com/Ishan-113/secure-login-app
 
